@@ -14,3 +14,5 @@ const double kDefaultPadding = 20.0;
 
 const String kApiEnpoint  = 'https://currencyapi.net/api/v1';
 const String kApiKey  = 'MK3AOZVyBZ725sVNntQASRBcTRbmNoAMCXUU';
+const int kMaxFraction  = 4;
+const int kMinIntDigit  = 1;

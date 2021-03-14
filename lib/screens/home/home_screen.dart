@@ -305,20 +305,20 @@ class DisplayContainerWidget extends StatelessWidget {
         DisplayTextWidget(
             fontSize: 20,
             fontWeight: FontWeight.w600,
-            text: '${_.selectedCurrency?.desc}'),
+            text: '${_.leftPanelCurrency?.desc}'),
         SizedBox(height: 5),
         FittedBox(
           fit: BoxFit.fitWidth,
           child: DisplayTextWidget(
               fontSize: 30,
               fontWeight: FontWeight.w600,
-              text: '${_.targetAmount.toStringAsFixed(2)}'),
+              text: '${_.getTargetAmount()}'),
         ),
         SizedBox(height: 5),
         DisplayTextWidget(
           fontSize: 20,
           fontWeight: FontWeight.w600,
-          text: '${_.selectedCurrency?.symbol}',
+          text: '${_.leftPanelCurrency?.symbol}',
         ),
       ],
     );
@@ -339,7 +339,15 @@ class DisplayContainerWidget extends StatelessWidget {
           child: DisplayTextWidget(
             fontSize: 30,
             fontWeight: FontWeight.w600,
-            text: ' ${(_.rateAmout * _.targetAmount.value).toStringAsFixed(2)}',
+            text: ' ${_.leftPanelRateAmout}*${_.targetAmount}',
+          ),
+        ),
+        FittedBox(
+          fit: BoxFit.fitWidth,
+          child: DisplayTextWidget(
+            fontSize: 30,
+            fontWeight: FontWeight.w600,
+            text: ' ${_.getTotalAmount().value}',
           ),
         ),
         SizedBox(height: 5),
