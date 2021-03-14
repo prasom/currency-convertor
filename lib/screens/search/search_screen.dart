@@ -1,8 +1,14 @@
 import 'package:currency_convertor/components/back_button.dart';
 import 'package:currency_convertor/components/top_bar.dart';
+import 'package:currency_convertor/controllers/calculator_controller.dart';
+import 'package:currency_convertor/controllers/currencies_controller.dart';
+import 'package:currency_convertor/controllers/rates_controller.dart';
 import 'package:currency_convertor/models/Currencies.dart';
+import 'package:currency_convertor/screens/home/components/display_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:get/get.dart';
+import 'package:get/instance_manager.dart';
 
 class SearchScreen extends StatefulWidget {
   SearchScreen({Key key}) : super(key: key);
@@ -12,17 +18,14 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  CurrenciesController currenciesController = Get.put(CurrenciesController());
+  RatesController ratesController = Get.put(RatesController());
+  CalculatorController calculatorController = Get.put(CalculatorController());
+
   String searchKey = "";
-  List<Currencies> currencies = sample_data
-      .map(
-        (question) => Currencies(
-          symbol: question['symbol'],
-          description: question['description'],
-        ),
-      )
-      .toList();
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: NeumorphicBackground(
         child: SafeArea(
@@ -37,24 +40,58 @@ class _SearchScreenState extends State<SearchScreen> {
                 label: "Search currencies",
                 hint: "",
                 onChanged: (searchKey) {
-                  setState(() {
-                    this.searchKey = searchKey;
-                  });
+                  currenciesController.searchCurrency(searchKey);
                 },
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: SizedBox(
                   height: 300,
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: currencies.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text('${currencies[index].description} ${currencies[index].symbol}'),
+                  child: Obx(() {
+                    if (currenciesController.isLoading.value)
+                      return Center(child: CircularProgressIndicator());
+                    else {
+                      var list = currenciesController.currenciesData.value
+                          .getCurrencyList();
+                      var filterText = currenciesController.filterText.value;
+                      if (filterText.isNotEmpty) {
+                        list.forEach((element) {
+                          return element.desc.contains(filterText);
+                        });
+                      }
+
+                      return ListView.builder(
+                        itemCount: list.length,
+                        itemBuilder: (context, index) {
+                          var item = list[index];
+                          return ListTile(
+                            title: Text(
+                              '${item.desc} (${item.symbol})',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                color:
+                                    NeumorphicTheme.defaultTextColor(context),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            onTap: () {
+                              var rates = ratesController.ratesData.value
+                                  .getCurrencyList();
+                              var rateItem = rates.firstWhere(
+                                  (element) => element.symbol == item.symbol);
+                              calculatorController
+                                  .updateRate(rateItem.rateAmount);
+                              calculatorController.updateSelectedCurrency(item);
+                              Navigator.pop(
+                                context,
+                              );
+                            },
+                          );
+                        },
                       );
-                    },
-                  ),
+                    }
+                  }),
                 ),
               )
             ],

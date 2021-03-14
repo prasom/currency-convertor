@@ -11,3 +11,6 @@ const kTextColorDarkTheme = Color(0xFFF9F8FD);
 const kBackgroundColorDarkTheme = Color(0xFF3C4046);
 
 const double kDefaultPadding = 20.0;
+
+const String kApiEnpoint  = 'https://currencyapi.net/api/v1';
+const String kApiKey  = 'MK3AOZVyBZ725sVNntQASRBcTRbmNoAMCXUU';

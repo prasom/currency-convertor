@@ -5,7 +5,7 @@ Color mC = Colors.grey.shade100;
 Color mCDark = kPrimaryColorDarkTheme;
 Color mCL = Colors.white;
 Color mCD = Colors.black.withOpacity(0.075);
-Color mCC = Colors.green.withOpacity(0.65);
+Color mCC = Color(0XFF0177C0);
 Color fCD = Colors.grey.shade700;
 Color fCL = Colors.grey;
 
