@@ -27,6 +27,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: NeumorphicBackground(
         child: SafeArea(
           child: Container(
@@ -84,7 +85,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                     (element) => element.symbol == item.symbol);
                                 calculatorController
                                     .updateRate(rateItem.rateAmount);
-                                calculatorController.updateSelectedCurrency(item);
+                                calculatorController
+                                    .updateSelectedCurrency(item);
                                 Navigator.pop(
                                   context,
                                 );
