@@ -29,72 +29,75 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       body: NeumorphicBackground(
         child: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(18),
-                child: TopBar(),
-              ),
-              _TextField(
-                label: "Search currencies",
-                hint: "",
-                onChanged: (searchKey) {
-                  currenciesController.searchCurrency(searchKey);
-                },
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: SizedBox(
-                  height: 300,
-                  child: Obx(() {
-                    if (currenciesController.isLoading.value)
-                      return Center(child: CircularProgressIndicator());
-                    else {
-                      var list = currenciesController.currenciesData.value
-                          .getCurrencyList();
-                      var filterText = currenciesController.filterText.value;
-                      if (filterText.isNotEmpty) {
-                        list.forEach((element) {
-                          return element.desc.contains(filterText);
-                        });
-                      }
-
-                      return ListView.builder(
-                        itemCount: list.length,
-                        itemBuilder: (context, index) {
-                          var item = list[index];
-                          return ListTile(
-                            title: Text(
-                              '${item.desc} (${item.symbol})',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color:
-                                    NeumorphicTheme.defaultTextColor(context),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            onTap: () {
-                              var rates = ratesController.ratesData.value
-                                  .getCurrencyList();
-                              var rateItem = rates.firstWhere(
-                                  (element) => element.symbol == item.symbol);
-                              calculatorController
-                                  .updateRate(rateItem.rateAmount);
-                              calculatorController.updateSelectedCurrency(item);
-                              Navigator.pop(
-                                context,
-                              );
-                            },
-                          );
-                        },
-                      );
-                    }
-                  }),
+          child: Container(
+            height: size.height,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(18),
+                  child: TopBar(),
                 ),
-              )
-            ],
+                _TextField(
+                  label: "Search currencies",
+                  hint: "",
+                  onChanged: (searchKey) {
+                    currenciesController.searchCurrency(searchKey);
+                  },
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: SizedBox(
+                    height: size.height * 0.6,
+                    child: Obx(() {
+                      if (currenciesController.isLoading.value)
+                        return Center(child: CircularProgressIndicator());
+                      else {
+                        var list = currenciesController.currenciesData.value
+                            .getCurrencyList();
+                        var filterText = currenciesController.filterText.value;
+                        if (filterText.isNotEmpty) {
+                          list.forEach((element) {
+                            return element.desc.contains(filterText);
+                          });
+                        }
+
+                        return ListView.builder(
+                          itemCount: list.length,
+                          itemBuilder: (context, index) {
+                            var item = list[index];
+                            return ListTile(
+                              title: Text(
+                                '${item.desc} (${item.symbol})',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  color:
+                                      NeumorphicTheme.defaultTextColor(context),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              onTap: () {
+                                var rates = ratesController.ratesData.value
+                                    .getCurrencyList();
+                                var rateItem = rates.firstWhere(
+                                    (element) => element.symbol == item.symbol);
+                                calculatorController
+                                    .updateRate(rateItem.rateAmount);
+                                calculatorController.updateSelectedCurrency(item);
+                                Navigator.pop(
+                                  context,
+                                );
+                              },
+                            );
+                          },
+                        );
+                      }
+                    }),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
