@@ -39,3 +39,7 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+appium-screenshot-1.png
+log.html
+output.xml
+report.html
