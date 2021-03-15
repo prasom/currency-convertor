@@ -66,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           NumberButtonWidget(
+                              key: Key('numpad_1'),
                               symbol: '1',
                               press: () {
                                 calculatorController.enterNumber('1');
