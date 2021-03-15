@@ -47,6 +47,7 @@ flutter run -d {your device}
 flutter test
 ```
 *E2E Test*
+
 Start appium server 
 ```
 appium
