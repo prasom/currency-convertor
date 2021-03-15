@@ -8,10 +8,7 @@ A currecy covertor made by Flutter.
 
 #### Preview
 
-![App UI](/app-preview/home.png)
-![App UI](/app-preview/home_dark.png)
-![App UI](/app-preview/search.png)
-![App UI](/app-preview/search_dark.png)
+![App UI](/app-preview/app_ui.png)
 
 ## Getting Started
 
