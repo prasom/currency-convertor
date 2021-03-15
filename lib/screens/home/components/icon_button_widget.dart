@@ -15,6 +15,7 @@ class IconButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final windowSize = MediaQuery.of(context).size;
     return NeumorphicButton(
       onPressed: press,
       style: NeumorphicStyle(
@@ -23,8 +24,8 @@ class IconButtonWidget extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: Container(
         alignment: Alignment.center,
-        width: 60,
-        height: 60,
+        width: windowSize.height * 0.07,
+        height: windowSize.height * 0.07,
         child: Icon(
           icon,
           color: color,

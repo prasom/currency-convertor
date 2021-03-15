@@ -13,6 +13,7 @@ class DisplayContainerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final windowSize = MediaQuery.of(context).size;
     return Neumorphic(
       padding: const EdgeInsets.all(8.0),
       style: NeumorphicStyle(
@@ -24,7 +25,7 @@ class DisplayContainerWidget extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(5),
         decoration: nMboxInvertActive,
-        height: 200,
+        height: windowSize.height * 0.25,
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

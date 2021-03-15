@@ -19,13 +19,14 @@ class TopBarWidget extends StatelessWidget {
         alignment: Alignment.center,
         children: <Widget>[
           Align(
-            alignment: Alignment.center,
+            alignment: Alignment.topLeft,
             child: Text(
               title,
               style: TextStyle(
-                  color: NeumorphicTheme.defaultTextColor(context),
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600),
+                color: NeumorphicTheme.defaultTextColor(context),
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           Align(
