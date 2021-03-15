@@ -47,5 +47,15 @@ flutter run -d {your device}
 flutter test
 ```
 *E2E Test*
+Start appium server 
+```
+appium
+```
+Change apk path to your local apk path
+```
+${APP_ANDROID}    /{your local path}/currency_convertor/build/app/outputs/apk/debug/app-debug.apk
+```
+Run android test script 
 ```
 robot e2e/android/home.robot
+```
