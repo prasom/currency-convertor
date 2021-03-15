@@ -29,9 +29,13 @@ A currecy covertor made by Flutter.
 ## Getting Started
 
 #### Flutter Installation
+mac OS
 
-Please follow flutter installation guideline [Click Here](https://flutter.dev/docs/get-started/install)
+Please follow flutter mac OS installation guideline [Click Here](https://flutter.dev/docs/get-started/install/macos)
 
+windows
+
+Please follow flutter window OS installation guideline [Click Here](https://flutter.dev/docs/get-started/install/windows)
 #### Appium Installation
 To setup appium [click here](https://medium.com/@chompoowirawan/%E0%B8%A3%E0%B8%A7%E0%B8%A1%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5-install-appium-for-robot-framework-%E0%B8%97%E0%B8%B1%E0%B9%89%E0%B8%87-android-%E0%B9%81%E0%B8%A5%E0%B8%B0-ios-%E0%B8%9A%E0%B8%99-mac-os-c54cb8adede6)
 #### Development
