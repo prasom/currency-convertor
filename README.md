@@ -10,6 +10,13 @@ A currecy covertor made by Flutter.
 
 ![App UI](/app-preview/app_ui.png)
 
+####  Feature
+- Click arrow icon to switch view target
+- Click numpad to enter number to view target
+- Click search icon to search and select currency
+- Click delete to delete target view
+- Click reset button to reset all enter value
+- Click top-right icon to switch light theme or dark theme
 ## Getting Started
 
 #### Flutter Installation
