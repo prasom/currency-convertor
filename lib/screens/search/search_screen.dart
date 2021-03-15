@@ -24,6 +24,12 @@ class _SearchScreenState extends State<SearchScreen> {
 
   String searchKey = "";
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    currenciesController.searchCurrency('');
+  }
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -57,10 +63,10 @@ class _SearchScreenState extends State<SearchScreen> {
                         var list = currenciesController.currenciesData.value
                             .getCurrencyList();
                         var filterText = currenciesController.filterText.value;
-                        if (filterText.isNotEmpty) {
-                          list.forEach((element) {
-                            return element.desc.contains(filterText);
-                          });
+                        if (filterText != '') {
+                          list = list.where((element) {
+                            return element.desc.toUpperCase().contains(filterText.toUpperCase()) ||  element.symbol.toUpperCase().contains(filterText.toUpperCase());
+                          }).toList();
                         }
 
                         return ListView.builder(

@@ -7,6 +7,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
+import 'components/display_container_widget.dart';
 import 'components/display_text_widget.dart';
 import 'components/icon_button_widget.dart';
 import 'components/number_button_widget.dart';
@@ -84,6 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icons.compare_arrows_rounded,
                       press: () {
                         calculatorController.toggleActive();
+                        calculatorController.updateAmoutValue();
                       },
                       color: _iconsColor(context),
                     ),
@@ -230,133 +232,5 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       return Colors.black;
     }
-  }
-}
-
-class DisplayContainerWidget extends StatelessWidget {
-  const DisplayContainerWidget({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Neumorphic(
-      padding: const EdgeInsets.all(8.0),
-      style: NeumorphicStyle(
-        shape: NeumorphicShape.concave,
-        boxShape: NeumorphicBoxShape.roundRect(
-          BorderRadius.circular(12),
-        ),
-      ),
-      child: Container(
-        padding: EdgeInsets.all(5),
-        decoration: nMboxInvertActive,
-        height: 200,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            GetBuilder<CalculatorController>(
-              init: CalculatorController(),
-              builder: (_) {
-                return Expanded(
-                  child: Container(
-                    decoration: _.activeLeft
-                        ? (NeumorphicTheme.isUsingDark(context)
-                            ? nMbtnDarkTheme
-                            : nMbtn)
-                        : null,
-                    child: _.activeLeft
-                        ? buildSourceCurrecy(_)
-                        : buildResultCurrecy(_),
-                  ),
-                );
-              },
-            ),
-            SizedBox(width: 5),
-            GetBuilder<CalculatorController>(
-              init: CalculatorController(),
-              builder: (_) {
-                return Expanded(
-                  child: Container(
-                    decoration: _.activeRight
-                        ? (NeumorphicTheme.isUsingDark(context)
-                            ? nMbtnDarkTheme
-                            : nMbtn)
-                        : null,
-                    child: _.activeRight
-                        ? buildSourceCurrecy(_)
-                        : buildResultCurrecy(_),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Column buildSourceCurrecy(CalculatorController _) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        DisplayTextWidget(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            text: '${_.leftPanelCurrency?.desc}'),
-        SizedBox(height: 5),
-        FittedBox(
-          fit: BoxFit.fitWidth,
-          child: DisplayTextWidget(
-              fontSize: 30,
-              fontWeight: FontWeight.w600,
-              text: '${_.getTargetAmount()}'),
-        ),
-        SizedBox(height: 5),
-        DisplayTextWidget(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          text: '${_.leftPanelCurrency?.symbol}',
-        ),
-      ],
-    );
-  }
-
-  Column buildResultCurrecy(CalculatorController _) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        DisplayTextWidget(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          text: 'United States Dollar',
-        ),
-        SizedBox(height: 5),
-        FittedBox(
-          fit: BoxFit.fitWidth,
-          child: DisplayTextWidget(
-            fontSize: 30,
-            fontWeight: FontWeight.w600,
-            text: ' ${_.leftPanelRateAmout}*${_.targetAmount}',
-          ),
-        ),
-        FittedBox(
-          fit: BoxFit.fitWidth,
-          child: DisplayTextWidget(
-            fontSize: 30,
-            fontWeight: FontWeight.w600,
-            text: ' ${_.getTotalAmount().value}',
-          ),
-        ),
-        SizedBox(height: 5),
-        DisplayTextWidget(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          text: 'USD',
-        ),
-      ],
-    );
   }
 }
