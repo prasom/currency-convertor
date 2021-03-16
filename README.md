@@ -20,6 +20,11 @@ A currecy covertor made by Flutter.
 ![App UI](/app-preview/app_ui.png)
 
 ####  Feature
+
+![Display](/app-preview/display.png)
+
+Currency display can switch between left and right
+
 - Click arrow icon to switch view target
 - Click numpad to enter number to view target
 - Click search icon to search and select currency
